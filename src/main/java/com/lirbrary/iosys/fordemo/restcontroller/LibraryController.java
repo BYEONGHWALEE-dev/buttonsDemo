@@ -2,6 +2,7 @@ package com.lirbrary.iosys.fordemo.restcontroller;
 
 import com.lirbrary.iosys.fordemo.dao.BookDAO;
 import com.lirbrary.iosys.fordemo.entity.Book;
+import com.lirbrary.iosys.fordemo.service.LibraryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,12 @@ import java.util.List;
 @Controller
 public class LibraryController {
 
-    // create BookDAO to utilize
-    private BookDAO bookDAO;
+    // create LibraryServiceto utilize
+    private LibraryService libraryService;
 
     // using constructor injection
-    public LibraryController(BookDAO bookDAO) {
-        this.bookDAO = bookDAO;
+    public LibraryController(LibraryService libraryService) {
+        this.libraryService = libraryService;
     }
 
     @GetMapping("/buttons")
@@ -38,9 +39,19 @@ public class LibraryController {
     public String addBook(@ModelAttribute("book") Book theBook) {
 
 
-        bookDAO.addBook(theBook);
+        libraryService.addBook(theBook);
 
         return "redirect:/buttons";
     }
+
+    @GetMapping("/list-books")
+    public String listBooks(Model theModel){
+
+        List<Book> theBooks = libraryService.findAll();
+        theModel.addAttribute("books", theBooks);
+
+        return "list-books";
+    }
+
 }
 
