@@ -1,6 +1,11 @@
 package com.lirbrary.iosys.fordemo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.NotFound;
 
 @Entity
 @Table(name = "renter")
@@ -11,13 +16,19 @@ public class Renter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotNull(message = "is required")
+    @Size(min = 1, message = "is required")
     private String firstName;
 
     private String lastName;
 
     private String email;
 
-    // define constructors
+    @Pattern(regexp = "[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
+    private String postalCode;
+
+
+// define constructors
 
     public Renter() {}
 
@@ -59,6 +70,14 @@ public class Renter {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     // define toString() method

@@ -37,4 +37,8 @@ public interface LibraryService {
     List<Renter> findRentersAll();
 
     Renter findRenterById(int id);
+
+    //
+    // add functions
+    void saveRenter(Renter renter);
 }

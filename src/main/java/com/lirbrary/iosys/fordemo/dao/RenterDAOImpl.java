@@ -3,6 +3,7 @@ package com.lirbrary.iosys.fordemo.dao;
 import com.lirbrary.iosys.fordemo.entity.Renter;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,17 @@ public class RenterDAOImpl implements RenterDAO{
 
         // find the students using EntityManager
         return entityManager.find(Renter.class, id);
+    }
+
+
+    // add methods
+
+    @Override
+    @Transactional
+    public void addRenter(Renter renter) {
+
+        // add the renter using entityManager
+        entityManager.persist(renter);
     }
 
 

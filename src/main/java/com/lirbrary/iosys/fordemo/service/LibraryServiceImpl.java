@@ -79,5 +79,12 @@ public class LibraryServiceImpl implements LibraryService {
         return renterDAO.findById(id);
     }
 
+    //
+    // add functions
+    @Override
+    public void saveRenter(Renter renter) {
+        renterDAO.addRenter(renter);
+    }
+
 
 }
